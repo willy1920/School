@@ -1,0 +1,41 @@
+.button-success,
+.button-error,
+.button-warning,
+.button-secondary {
+  color: white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  padding: 7px;
+  width: 50px;
+}
+
+.button-success {
+  background: rgb(28, 184, 65); /* this is a green */
+}
+
+.button-error {
+  background: rgb(202, 60, 60); /* this is a maroon */
+}
+
+.button-warning {
+  background: rgb(223, 117, 20); /* this is an orange */
+}
+
+.button-secondary {
+  background: rgb(66, 184, 221); /* this is a light blue */
+}
+
+.buttons-submit{
+  border-radius: 25px;
+  background-color: #008ae6;
+  font-size: 20px;
+  color: white;
+  padding: 10px 30px 10px 30px;
+  box-sizing: border-box;
+  box-shadow: 50px rgb(0, 0, 0, 0);
+}
+
+.buttons-submit:hover{
+  cursor: pointer;
+  background-color: #29a329;
+}
