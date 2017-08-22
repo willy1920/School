@@ -94,7 +94,6 @@ function getCheckedValue(){
   }
 
   input = input + 'length=' + length;
-  console.log(input);
   return input;
 }
 
@@ -104,7 +103,8 @@ function submitBiodata(){
   ajaxRequest.onreadystatechange = function(){
     if (ajaxRequest.readyState == 4 && ajaxRequest.status == 200) {
       var respon = ajaxRequest.responseText;
-      console.log(respon);
+      var display = document.getElementById("respon");
+      display.innerHTML = respon;
     }
   }
   ajaxRequest.open("POST", "config/ICTShowPrintBiodata.php", true);
