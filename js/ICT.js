@@ -81,17 +81,19 @@ function getCheckedValue(){
   var input = '';
   var c = document.getElementById('tableBiodata').getElementsByTagName('input');
   var length = 0;
+  var x = 0;
 
   for (var i = 0; i < c.length; i++) {
     if (c[i].type == 'checkbox') {
       if(c[i].checked == true){
         length++;
-        input = input + "a" + i + "=" + c[i].value + "&";
+        input = input + 'a' + x + '=' + c[i].value + '&';
+        x++;
       }
     }
   }
 
-  input = input + "length=" + length;
+  input = input + 'length=' + length;
   console.log(input);
   return input;
 }
@@ -101,7 +103,8 @@ function submitBiodata(){
   var ajaxRequest = ajax(ajaxRequest);
   ajaxRequest.onreadystatechange = function(){
     if (ajaxRequest.readyState == 4 && ajaxRequest.status == 200) {
-
+      var respon = ajaxRequest.responseText;
+      console.log(respon);
     }
   }
   ajaxRequest.open("POST", "config/ICTShowPrintBiodata.php", true);

@@ -48,6 +48,8 @@
           </tr>
         </table>
         <?php
+      } else{
+        echo "Tidak ada data";
       }
     }
 
