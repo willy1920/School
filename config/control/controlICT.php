@@ -24,18 +24,21 @@
     function showPrintBiodata($data, $length){
       $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->name);
       $sqlString = '';
-      for ($i=0; $i < $length ; $i++) {
-        if($i != $length - 1){
-          $sqlString = $sqlString.$data[$i].",";
+      for ($i = 0; $i < $length ; $i++) {
+        if($i == 0){
+          $sqlString = "students.id = ".$data[$i];
+        } elseif ($i != $length - 1) {
+          $sqlString = ", OR students.id = ".$data[$i];
         } else{
-          $sqlString = $sqlString.$data[$i];
+          $sqlString = "OR students.id = ".$data[$i];
         }
       }
       $sql = "SELECT
+      students.id,
       students.name,
       students.nis,
       students.nisn,
-      studetns.sex,
+      students.sex,
       students.place_birth,
       students.date_birth,
       others.agama,
@@ -44,7 +47,8 @@
       FROM students
       INNER JOIN others
       ON students.id = others.id
-      WHERE students.id IN ($sqlString)";
+      WHERE $sqlString";
+      echo $sql;
       $query = $mysqli->query($sql);
       $num = $query->num_rows;
 
@@ -243,6 +247,8 @@
           </main>
           <?php
         }
+      } else{
+        echo "gagal";
       }
 
     }

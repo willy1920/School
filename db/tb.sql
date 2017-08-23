@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 14 Agu 2017 pada 00.37
+-- Generation Time: 23 Agu 2017 pada 14.50
 -- Versi Server: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -41,19 +41,30 @@ CREATE TABLE `class` (
 
 CREATE TABLE `dad` (
   `id` smallint(5) UNSIGNED NOT NULL,
-  `name` char(50) NOT NULL,
-  `place_birth` char(30) NOT NULL,
-  `date_birth` date NOT NULL,
-  `job` char(30) NOT NULL,
-  `address` char(60) NOT NULL,
-  `office` char(60) NOT NULL,
-  `phone_number` char(12) NOT NULL,
-  `wa` char(12) NOT NULL,
-  `bbm` char(10) NOT NULL,
-  `email` char(30) NOT NULL,
-  `last_education` char(20) NOT NULL,
-  `nationality` char(20) NOT NULL,
-  `religion` char(10) NOT NULL
+  `name` char(50) DEFAULT NULL,
+  `place_birth` char(30) DEFAULT NULL,
+  `date_birth` date DEFAULT NULL,
+  `job` char(30) DEFAULT NULL,
+  `address` char(60) DEFAULT NULL,
+  `office` char(60) DEFAULT NULL,
+  `phone_number` char(12) DEFAULT NULL,
+  `wa` char(12) DEFAULT NULL,
+  `bbm` char(10) DEFAULT NULL,
+  `email` char(30) DEFAULT NULL,
+  `last_education` char(20) DEFAULT NULL,
+  `nationality` char(20) DEFAULT NULL,
+  `religion` char(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `generation`
+--
+
+CREATE TABLE `generation` (
+  `id` tinyint(3) UNSIGNED NOT NULL,
+  `generation` tinyint(3) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -64,20 +75,20 @@ CREATE TABLE `dad` (
 
 CREATE TABLE `guardian` (
   `id` smallint(5) UNSIGNED NOT NULL,
-  `name` char(50) NOT NULL,
-  `place_birth` char(30) NOT NULL,
-  `date_birth` date NOT NULL,
-  `job` char(30) NOT NULL,
-  `address` char(60) NOT NULL,
-  `office` char(60) NOT NULL,
-  `phone_number` char(12) NOT NULL,
-  `wa` char(12) NOT NULL,
-  `bbm` char(10) NOT NULL,
-  `email` char(30) NOT NULL,
-  `last_education` char(20) NOT NULL,
-  `nationality` char(20) NOT NULL,
-  `religion` char(11) NOT NULL,
-  `relationship` char(20) NOT NULL
+  `name` char(50) DEFAULT NULL,
+  `place_birth` char(30) DEFAULT NULL,
+  `date_birth` date DEFAULT NULL,
+  `job` char(30) DEFAULT NULL,
+  `address` char(60) DEFAULT NULL,
+  `office` char(60) DEFAULT NULL,
+  `phone_number` char(12) DEFAULT NULL,
+  `wa` char(12) DEFAULT NULL,
+  `bbm` char(10) DEFAULT NULL,
+  `email` char(30) DEFAULT NULL,
+  `last_education` char(20) DEFAULT NULL,
+  `nationality` char(20) DEFAULT NULL,
+  `religion` char(11) DEFAULT NULL,
+  `relationship` char(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -88,19 +99,19 @@ CREATE TABLE `guardian` (
 
 CREATE TABLE `mom` (
   `id` smallint(5) UNSIGNED NOT NULL,
-  `name` char(50) NOT NULL,
-  `place_birth` char(30) NOT NULL,
-  `date_birth` date NOT NULL,
-  `job` char(30) NOT NULL,
-  `address` char(60) NOT NULL,
-  `office` char(60) NOT NULL,
-  `phone_number` char(12) NOT NULL,
-  `wa` char(12) NOT NULL,
-  `bbm` char(10) NOT NULL,
-  `email` char(30) NOT NULL,
-  `last_education` char(20) NOT NULL,
-  `nationality` char(20) NOT NULL,
-  `religion` char(10) NOT NULL
+  `name` char(50) DEFAULT NULL,
+  `place_birth` char(30) DEFAULT NULL,
+  `date_birth` date DEFAULT NULL,
+  `job` char(30) DEFAULT NULL,
+  `address` char(60) DEFAULT NULL,
+  `office` char(60) DEFAULT NULL,
+  `phone_number` char(12) DEFAULT NULL,
+  `wa` char(12) DEFAULT NULL,
+  `bbm` char(10) DEFAULT NULL,
+  `email` char(30) DEFAULT NULL,
+  `last_education` char(20) DEFAULT NULL,
+  `nationality` char(20) DEFAULT NULL,
+  `religion` char(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -111,15 +122,16 @@ CREATE TABLE `mom` (
 
 CREATE TABLE `others` (
   `id` smallint(5) UNSIGNED NOT NULL,
-  `WN` char(20) NOT NULL,
+  `WN` char(20) DEFAULT NULL,
   `asal_sekolah` char(30) DEFAULT NULL,
   `alamat_asal_sekolah` char(60) DEFAULT NULL,
-  `kelas_pertama` char(5) NOT NULL,
+  `kelas_pertama` char(5) DEFAULT NULL,
   `jumlah_saudara` tinyint(2) UNSIGNED DEFAULT NULL,
   `anak_ke` tinyint(2) UNSIGNED DEFAULT NULL,
+  `status` char(20) DEFAULT NULL,
   `bahasa` char(70) DEFAULT NULL,
-  `agama` char(10) NOT NULL,
-  `tanggal_diterima` date NOT NULL
+  `agama` char(10) DEFAULT NULL,
+  `tanggal_diterima` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -156,7 +168,7 @@ CREATE TABLE `students` (
   `sex` char(1) NOT NULL,
   `place_birth` char(30) NOT NULL,
   `date_birth` date NOT NULL,
-  `generation` smallint(4) UNSIGNED NOT NULL,
+  `generation` tinyint(3) UNSIGNED DEFAULT NULL,
   `class_id` tinyint(3) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -186,6 +198,12 @@ ALTER TABLE `class`
 -- Indexes for table `dad`
 --
 ALTER TABLE `dad`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `generation`
+--
+ALTER TABLE `generation`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -233,22 +251,27 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `generation`
+--
+ALTER TABLE `generation`
+  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `others`
 --
 ALTER TABLE `others`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `staf`
 --
 ALTER TABLE `staf`
-  MODIFY `id` smallint(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` smallint(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --

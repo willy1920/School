@@ -86,9 +86,9 @@ function getCheckedValue(){
   for (var i = 0; i < c.length; i++) {
     if (c[i].type == 'checkbox') {
       if(c[i].checked == true){
-        length++;
         input = input + 'a' + x + '=' + c[i].value + '&';
         x++;
+        length++;
       }
     }
   }
