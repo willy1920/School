@@ -32,13 +32,19 @@
         }
       }
       $sql = "SELECT
-      name,
-      nis,
-      nisn,
-      sex,
-      place_birth,
-      date_birth
-      from students where id in ($sqlString)";
+      students.name,
+      students.nis,
+      students.nisn,
+      studetns.sex,
+      students.place_birth,
+      students.date_birth,
+      others.agama,
+      others.anak_ke,
+      others.status
+      FROM students
+      INNER JOIN others
+      ON students.id = others.id
+      WHERE students.id IN ($sqlString)";
       $query = $mysqli->query($sql);
       $num = $query->num_rows;
 
@@ -90,19 +96,19 @@
                   <td>5.</td>
                   <td class="td">Agama</td>
                   <td>:</td>
-                  <td class="isi">Katolik</td>
+                  <td class="isi"><?php echo $row['agama']; ?></td>
                 </tr>
                 <tr>
                   <td>6.</td>
                   <td class="td">Anak ke-</td>
                   <td>:</td>
-                  <td class="isi">1</td>
+                  <td class="isi"><?php echo $row['anak_ke']; ?></td>
                 </tr>
                 <tr>
                   <td>7.</td>
                   <td class="td">Status dalam keluarga</td>
                   <td>:</td>
-                  <td class="isi">Anak Kandung</td>
+                  <td class="isi"><?php echo $row['status']; ?></td>
                 </tr>
                 <tr>
                   <td>8.</td>

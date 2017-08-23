@@ -7,7 +7,7 @@
     include "config/publicHead.php";
   ?>
   <body>
-    <menu class="leftMenu">
+    <menu class="leftMenu no-print">
       <img class="iconPeople" src="image/peopleIcon.png" alt="Icon People">
 
       <ul class="leftMenu-ul" id="leftMenu">

@@ -114,6 +114,7 @@ html, body{width: 100%; height: 100%; box-sizing: border-box; z-index: 0; paddin
 .print .footerTTD{text-align: center; float: left; margin-left:100px; margin-top: 5px;}
 @media print{
   .no-print, .no-print *{display: none !important;}
+  #respon{margin: 0; padding: 0;}
   @page{
     size : A4 landscape;
     margin: none;
