@@ -36,6 +36,18 @@
         $stmt->bind_param("ssssssii", $name, $nis, $nisn, $sex, $place, $date, $generation, $class);
         if($stmt->execute()){
           $lastId = $stmt->insert_id;
+          $sql = "INSERT INTO others(id) VALUES($lastId)";
+          $mysqli->query($sql);
+
+          $sql = "INSERT INTO dad(id) VALUES($lastId)";
+          $mysqli->query($sql);
+
+          $sql = "INSERT INTO mom(id) VALUES($lastId)";
+          $mysqli->query($sql);
+
+          $sql = "INSERT INTO guardian(id) VALUES($lastId)";
+          $mysqli->query($sql);
+
           echo '{"code":"1", "id":"'.$lastId.'"}';
         } else{
           echo '{"code":"0"}';
@@ -47,20 +59,19 @@
 
     function inputOther($id, $nationality, $name, $address, $grade, $saudara, $ke, $language, $religion, $date){
       $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->name);
-      $stmt = $mysqli->prepare("INSERT INTO others
-        (id,
-          WN,
-          asal_sekolah,
-          alamat_asal_sekolah,
-          kelas_pertama,
-          jumlah_saudara,
-          anak_ke,
-          bahasa,
-          agama,
-          tanggal_diterima) VALUES
-          (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+      $stmt = $mysqli->prepare("UPDATE others
+        SET WN=?,
+        asal_sekolah=?,
+        alamat_asal_sekolah=?,
+        kelas_pertama=?,
+        jumlah_saudara=?,
+        anak_ke=?,
+        bahasa=?,
+        agama=?,
+        tanggal_diterima=?
+        WHERE id=?");
         if($stmt){
-          $stmt->bind_param("issssiisss", $id, $nationality, $name, $address, $grade, $saudara, $ke, $language, $religion, $date);
+          $stmt->bind_param("ssssiisssi", $nationality, $name, $address, $grade, $saudara, $ke, $language, $religion, $date, $id);
           if($stmt->execute()){
             echo '{"code":"1"}';
           } else{
@@ -73,24 +84,24 @@
 
     function inputDad($id, $name, $place, $date, $address, $job, $office, $number, $wa, $bbm, $email, $education, $nationality, $religion){
       $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->name);
-      $stmt = $mysqli->prepare("INSERT INTO dad
-        (id,
-        name,
-        place_birth,
-        date_birth,
-        job,
-        address,
-        office,
-        phone_number,
-        wa,
-        bbm,
-        email,
-        last_education,
-        nationality,
-        religion) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+      $stmt = $mysqli->prepare("UPDATE dad
+        SET name=?,
+        place_birth=?,
+        date_birth=?,
+        job=?,
+        address=?,
+        office=?,
+        phone_number=?,
+        wa=?,
+        bbm=?,
+        email=?,
+        last_education=?,
+        nationality=?,
+        religion=?
+        WHERE id=?");
       if ($stmt) {
-        $stmt->bind_param("isssssssssssss",
-        $id, $name, $place, $date, $job, $address, $office, $number, $wa, $bbm, $email, $education, $nationality, $religion);
+        $stmt->bind_param("sssssssssssssi",
+        $name, $place, $date, $job, $address, $office, $number, $wa, $bbm, $email, $education, $nationality, $religion, $id);
         if($stmt->execute()){
           echo '{"code":"1"}';
         } else{
@@ -103,24 +114,24 @@
 
     function inputMom($id, $name, $place, $date, $address, $job, $office, $number, $wa, $bbm, $email, $education, $nationality, $religion){
       $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->name);
-      $stmt = $mysqli->prepare("INSERT INTO mom
-        (id,
-        name,
-        place_birth,
-        date_birth,
-        job,
-        address,
-        office,
-        phone_number,
-        wa,
-        bbm,
-        email,
-        last_education,
-        nationality,
-        religion) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+      $stmt = $mysqli->prepare("UPDATE mom
+        SET name=?,
+        place_birth=?,
+        date_birth=?,
+        job=?,
+        address=?,
+        office=?,
+        phone_number=?,
+        wa=?,
+        bbm=?,
+        email=?,
+        last_education=?,
+        nationality=?,
+        religion=?
+        WHERE id=?");
       if ($stmt) {
-        $stmt->bind_param("isssssssssssss",
-        $id, $name, $place, $date, $job, $address, $office, $number, $wa, $bbm, $email, $education, $nationality, $religion);
+        $stmt->bind_param("sssssssssssssi",
+        $name, $place, $date, $job, $address, $office, $number, $wa, $bbm, $email, $education, $nationality, $religion, $id);
         if($stmt->execute()){
           echo '{"code":"1"}';
         } else{
@@ -133,25 +144,25 @@
 
     function inputGuardian($id, $name, $place, $date, $address, $job, $office, $number, $wa, $bbm, $email, $education, $nationality, $religion, $relationship){
       $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->name);
-      $stmt = $mysqli->prepare("INSERT INTO guardian
-        (id,
-        name,
-        place_birth,
-        date_birth,
-        job,
-        address,
-        office,
-        phone_number,
-        wa,
-        bbm,
-        email,
-        last_education,
-        nationality,
-        religion,
-        relationship) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+      $stmt = $mysqli->prepare("UPDATE guardian
+        SET name=?,
+        place_birth=?,
+        date_birth=?,
+        job=?,
+        address=?,
+        office=?,
+        phone_number=?,
+        wa=?,
+        bbm=?,
+        email=?,
+        last_education=?,
+        nationality=?,
+        religion=?,
+        relationship=?
+        WHERE id=?");
       if ($stmt) {
-        $stmt->bind_param("issssssssssssss",
-        $id, $name, $place, $date, $job, $address, $office, $number, $wa, $bbm, $email, $education, $nationality, $religion, $relationship);
+        $stmt->bind_param("ssssssssssssssi",
+        $name, $place, $date, $job, $address, $office, $number, $wa, $bbm, $email, $education, $nationality, $religion, $relationship, $id);
         if($stmt->execute()){
           echo '{"code":"1"}';
         } else{

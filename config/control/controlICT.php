@@ -24,17 +24,14 @@
     function showPrintBiodata($data, $length){
       $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->name);
       $sqlString = '';
-      for ($i = 0; $i < $length ; $i++) {
-        if($i == 0){
-          $sqlString = "students.id = ".$data[$i];
-        } elseif ($i != $length - 1) {
-          $sqlString = ", OR students.id = ".$data[$i];
+      for ($i=0; $i < $length ; $i++) {
+        if($i != $length - 1){
+          $sqlString = $sqlString.$data[$i].", ";
         } else{
-          $sqlString = "OR students.id = ".$data[$i];
+          $sqlString = $sqlString.$data[$i];
         }
       }
       $sql = "SELECT
-      students.id,
       students.name,
       students.nis,
       students.nisn,
@@ -43,12 +40,32 @@
       students.date_birth,
       others.agama,
       others.anak_ke,
-      others.status
+      others.status,
+      others.kelas_pertama,
+      others.tanggal_diterima,
+      others.asal_sekolah,
+      others.alamat_asal_sekolah,
+      mom.name,
+      mom.address,
+      mom.phone_number,
+      mom.job,
+      dad.name,
+      dad.address,
+      dad.phone_number,
+      dad.job,
+      guardian.name,
+      guardian.phone_number,
+      guardian.job
       FROM students
       INNER JOIN others
       ON students.id = others.id
-      WHERE $sqlString";
-      echo $sql;
+      INNER JOIN dad
+      ON students.id = dad.id
+      INNER JOIN mom
+      ON students.id = mom.id
+      INNER JOIN guardian
+      ON students.id = guardian.id
+      WHERE students.id IN ($sqlString)";
       $query = $mysqli->query($sql);
       $num = $query->num_rows;
 
