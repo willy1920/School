@@ -45,17 +45,17 @@
       others.tanggal_diterima,
       others.asal_sekolah,
       others.alamat_asal_sekolah,
-      mom.name,
-      mom.address,
-      mom.phone_number,
-      mom.job,
-      dad.name,
-      dad.address,
-      dad.phone_number,
-      dad.job,
-      guardian.name,
-      guardian.phone_number,
-      guardian.job
+      mom.mom_name,
+      mom.mom_address,
+      mom.mom_phone_number,
+      mom.mom_job,
+      dad.dad_name,
+      dad.dad_address,
+      dad.dad_phone_number,
+      dad.dad_job,
+      guardian.guardian_name,
+      guardian.guardian_phone_number,
+      guardian.guardian_job
       FROM students
       INNER JOIN others
       ON students.id = others.id

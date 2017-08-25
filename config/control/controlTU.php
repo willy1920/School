@@ -39,13 +39,13 @@
           $sql = "INSERT INTO others(id) VALUES($lastId)";
           $mysqli->query($sql);
 
-          $sql = "INSERT INTO dad(id) VALUES($lastId)";
+          $sql = "INSERT INTO dad(dad_id) VALUES($lastId)";
           $mysqli->query($sql);
 
-          $sql = "INSERT INTO mom(id) VALUES($lastId)";
+          $sql = "INSERT INTO mom(mom_id) VALUES($lastId)";
           $mysqli->query($sql);
 
-          $sql = "INSERT INTO guardian(id) VALUES($lastId)";
+          $sql = "INSERT INTO guardian(guardian_id) VALUES($lastId)";
           $mysqli->query($sql);
 
           echo '{"code":"1", "id":"'.$lastId.'"}';
@@ -85,20 +85,20 @@
     function inputDad($id, $name, $place, $date, $address, $job, $office, $number, $wa, $bbm, $email, $education, $nationality, $religion){
       $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->name);
       $stmt = $mysqli->prepare("UPDATE dad
-        SET name=?,
-        place_birth=?,
+        SET dad_name=?,
+        dad_place_birth=?,
         date_birth=?,
-        job=?,
-        address=?,
-        office=?,
-        phone_number=?,
-        wa=?,
-        bbm=?,
-        email=?,
-        last_education=?,
-        nationality=?,
-        religion=?
-        WHERE id=?");
+        dad_job=?,
+        dad_address=?,
+        dad_office=?,
+        dad_phone_number=?,
+        dad_wa=?,
+        dad_bbm=?,
+        dad_email=?,
+        dad_last_education=?,
+        dad_nationality=?,
+        dad_religion=?
+        WHERE dad_id=?");
       if ($stmt) {
         $stmt->bind_param("sssssssssssssi",
         $name, $place, $date, $job, $address, $office, $number, $wa, $bbm, $email, $education, $nationality, $religion, $id);
@@ -115,20 +115,20 @@
     function inputMom($id, $name, $place, $date, $address, $job, $office, $number, $wa, $bbm, $email, $education, $nationality, $religion){
       $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->name);
       $stmt = $mysqli->prepare("UPDATE mom
-        SET name=?,
-        place_birth=?,
-        date_birth=?,
-        job=?,
-        address=?,
-        office=?,
-        phone_number=?,
-        wa=?,
-        bbm=?,
-        email=?,
-        last_education=?,
-        nationality=?,
-        religion=?
-        WHERE id=?");
+        SET mom_name=?,
+        mom_place_birth=?,
+        mom_date_birth=?,
+        mom_job=?,
+        mom_address=?,
+        mom_office=?,
+        mom_phone_number=?,
+        mom_wa=?,
+        mom_bbm=?,
+        mom_email=?,
+        mom_last_education=?,
+        mom_nationality=?,
+        mom_religion=?
+        WHERE mom_id=?");
       if ($stmt) {
         $stmt->bind_param("sssssssssssssi",
         $name, $place, $date, $job, $address, $office, $number, $wa, $bbm, $email, $education, $nationality, $religion, $id);
@@ -145,21 +145,21 @@
     function inputGuardian($id, $name, $place, $date, $address, $job, $office, $number, $wa, $bbm, $email, $education, $nationality, $religion, $relationship){
       $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->name);
       $stmt = $mysqli->prepare("UPDATE guardian
-        SET name=?,
-        place_birth=?,
-        date_birth=?,
-        job=?,
-        address=?,
-        office=?,
-        phone_number=?,
-        wa=?,
-        bbm=?,
-        email=?,
-        last_education=?,
-        nationality=?,
-        religion=?,
-        relationship=?
-        WHERE id=?");
+        SET guardian_name=?,
+        guardian_place_birth=?,
+        guardian_date_birth=?,
+        guardian_job=?,
+        guardian_address=?,
+        guardian_office=?,
+        guardian_phone_number=?,
+        guardian_wa=?,
+        guardian_bbm=?,
+        guardian_email=?,
+        guardian_last_education=?,
+        guardian_nationality=?,
+        guardian_religion=?,
+        guardian_relationship=?
+        WHERE guardian_id=?");
       if ($stmt) {
         $stmt->bind_param("ssssssssssssssi",
         $name, $place, $date, $job, $address, $office, $number, $wa, $bbm, $email, $education, $nationality, $religion, $relationship, $id);
