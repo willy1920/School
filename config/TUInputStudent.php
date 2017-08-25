@@ -9,6 +9,9 @@
   $generation = htmlspecialchars($_POST['generation']);
   $class = htmlspecialchars($_POST['class']);
 
+  $name = ucwords($name);
+  $place = ucwords($place);
+
   $input = new TU;
   $input->inputStudent($name, $nis, $nisn, $sex, $place, $date, $generation, $class);
 ?>

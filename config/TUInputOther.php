@@ -17,7 +17,7 @@
   $name = ucwords($name);
   $address = ucwords($address);
   $religion = ucwords($religion);
-  
+
   $input = new TU;
   $input->inputOther($id, $nationality, $name, $address, $firstGrade, $saudara, $ke, $language, $religion, $accepted);
 ?>
