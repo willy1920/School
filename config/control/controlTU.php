@@ -87,7 +87,7 @@
       $stmt = $mysqli->prepare("UPDATE dad
         SET dad_name=?,
         dad_place_birth=?,
-        date_birth=?,
+        dad_date_birth=?,
         dad_job=?,
         dad_address=?,
         dad_office=?,

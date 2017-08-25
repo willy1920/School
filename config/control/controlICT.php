@@ -55,16 +55,17 @@
       dad.dad_job,
       guardian.guardian_name,
       guardian.guardian_phone_number,
-      guardian.guardian_job
+      guardian.guardian_job,
+      guardian.guardian_address
       FROM students
       INNER JOIN others
       ON students.id = others.id
       INNER JOIN dad
-      ON students.id = dad.id
+      ON students.id = dad.dad_id
       INNER JOIN mom
-      ON students.id = mom.id
+      ON students.id = mom.mom_id
       INNER JOIN guardian
-      ON students.id = guardian.id
+      ON students.id = guardian.guardian_id
       WHERE students.id IN ($sqlString)";
       $query = $mysqli->query($sql);
       $num = $query->num_rows;
@@ -135,13 +136,13 @@
                   <td>8.</td>
                   <td class="td">Alamat siswa</td>
                   <td>:</td>
-                  <td class="isi">Villa Ceria Lestari No. G12</td>
+                  <td class="isi"><?php echo $row['dad_address']; ?></td>
                 </tr>
                 <tr>
                   <td></td>
                   <td class="td">Telepon</td>
                   <td>:</td>
-                  <td class="isi">05618123277</td>
+                  <td class="isi"><?php echo $row['dad_phone_number']; ?></td>
                 </tr>
                 <tr>
                   <td>9.</td>
@@ -153,13 +154,13 @@
                   <td></td>
                   <td class="td">a. Di kelas</td>
                   <td>:</td>
-                  <td class="isi">1</td>
+                  <td class="isi"><?php echo $row['kelas_pertama']; ?></td>
                 </tr>
                 <tr>
                   <td></td>
                   <td class="td">b. Pada tanggal</td>
                   <td>:</td>
-                  <td class="isi"></td>
+                  <td class="isi"><?php echo $row['tanggal_diterima']; ?></td>
                 </tr>
                 <tr>
                   <td>10.</td>
@@ -171,13 +172,13 @@
                   <td></td>
                   <td class="td">a. Nama sekolah</td>
                   <td>:</td>
-                  <td class="isi">TK Tunas Bangsa</td>
+                  <td class="isi"><?php echo $row['asal_sekolah']; ?></td>
                 </tr>
                 <tr>
                   <td></td>
                   <td class="td">b. Alamat</td>
                   <td>:</td>
-                  <td class="isi">Jl. Arteri Supadio</td>
+                  <td class="isi"><?php echo $row['alamat_asal_sekolah']; ?></td>
                 </tr>
                 <tr>
                   <td>11.</td>
@@ -189,25 +190,25 @@
                   <td></td>
                   <td class="td">a. Ayah</td>
                   <td>:</td>
-                  <td class="isi">Antonius Harya Pungkas Anom</td>
+                  <td class="isi"><?php echo $row['dad_name']; ?></td>
                 </tr>
                 <tr>
                   <td></td>
                   <td class="td">b. Ibu</td>
                   <td>:</td>
-                  <td class="isi">Tirsa Elfira</td>
+                  <td class="isi"><?php echo $row['mom_name']; ?></td>
                 </tr>
                 <tr>
                   <td>12.</td>
                   <td class="td">Alamat orang tua</td>
                   <td>:</td>
-                  <td class="isi">Villa Ceria Lestari No. G12 Jl. Sungau Raya dalam Komple Batara 3 No B.32</td>
+                  <td class="isi"><?php echo $row['mom_address']; ?></td>
                 </tr>
                 <tr>
                   <td></td>
                   <td class="td">Telepon</td>
                   <td>:</td>
-                  <td class="isi">05618123277</td>
+                  <td class="isi"><?php echo $row['mom_phone_number']; ?></td>
                 </tr>
                 <tr>
                   <td>13.</td>
@@ -219,37 +220,37 @@
                   <td></td>
                   <td class="td">a. Ayah</td>
                   <td>:</td>
-                  <td class="isi">PNS</td>
+                  <td class="isi"><?php echo $row['dad_job']; ?></td>
                 </tr>
                 <tr>
                   <td></td>
                   <td class="td">b. Ibu</td>
                   <td>:</td>
-                  <td class="isi">PNS</td>
+                  <td class="isi"><?php echo $row['mom_job']; ?></td>
                 </tr>
                 <tr>
                   <td>14.</td>
                   <td class="td">Nama wali</td>
                   <td>:</td>
-                  <td class="isi"></td>
+                  <td class="isi"><?php echo $row['guardian_name']; ?></td>
                 </tr>
                 <tr>
                   <td>15.</td>
                   <td class="td">Alamat wali</td>
                   <td>:</td>
-                  <td class="isi"></td>
+                  <td class="isi"><?php echo $row['guardian_address']; ?></td>
                 </tr>
                 <tr>
                   <td></td>
                   <td class="td">Telepon</td>
                   <td>:</td>
-                  <td class="isi"></td>
+                  <td class="isi"><?php echo $row['guardian_phone_number']; ?></td>
                 </tr>
                 <tr>
                   <td>16.</td>
                   <td class="td">Pekerjaan wali</td>
                   <td>:</td>
-                  <td class="isi"></td>
+                  <td class="isi"><?php echo $row['guardian_job']; ?></td>
                 </tr>
               </table>
 
