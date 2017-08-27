@@ -112,7 +112,7 @@
                   <td>4.</td>
                   <td class="td">Tempat dan tgl lahir</td>
                   <td>:</td>
-                  <td class="isi"><?php echo $row['place_birth'].", ".$row['date_birth']; ?></td>
+                  <td class="isi"><?php echo $row['place_birth'].", ".date("d F Y", strtotime($row['date_birth'])); ?></td>
                 </tr>
                 <tr>
                   <td>5.</td>
