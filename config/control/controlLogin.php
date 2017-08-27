@@ -7,10 +7,10 @@
       $user = strtolower($user);
       $pass = sha1($pass);
       $stmt = $mysqli->prepare(
-        "SELECT users.id, users.user, users.pass, staf.status
+        "SELECT users.id, users.user, users.pass, staf_status.staf_status
         FROM users
-        INNER JOIN staf
-        ON users.id = staf.id
+        INNER JOIN staf_status
+        ON users.staf_status = staf_status.id
         WHERE users.user=? and users.pass=?");
 
       if($stmt){
