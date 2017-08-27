@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: 25 Agu 2017 pada 03.12
+-- Generation Time: 27 Agu 2017 pada 11.37
 -- Versi Server: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -32,13 +32,6 @@ CREATE TABLE `class` (
   `id` tinyint(3) UNSIGNED NOT NULL,
   `name` char(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `class`
---
-
-INSERT INTO `class` (`id`, `name`) VALUES
-(1, 'P1 Curiosity');
 
 -- --------------------------------------------------------
 
@@ -82,8 +75,8 @@ CREATE TABLE `generation` (
 
 CREATE TABLE `guardian` (
   `guardian_id` smallint(5) UNSIGNED NOT NULL,
-  `mom_name` char(50) DEFAULT NULL,
-  `mom_place_birth` char(30) DEFAULT NULL,
+  `guardian_name` char(50) DEFAULT NULL,
+  `guardian_place_birth` char(30) DEFAULT NULL,
   `guardian_date_birth` date DEFAULT NULL,
   `guardian_job` char(30) DEFAULT NULL,
   `guardian_address` char(60) DEFAULT NULL,
@@ -141,15 +134,6 @@ CREATE TABLE `others` (
   `tanggal_diterima` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `others`
---
-
-INSERT INTO `others` (`id`, `WN`, `asal_sekolah`, `alamat_asal_sekolah`, `kelas_pertama`, `jumlah_saudara`, `anak_ke`, `status`, `bahasa`, `agama`, `tanggal_diterima`) VALUES
-(3, 'Indonesia', 'Tk Tunas Bangsa', 'Jl. Arteri Km2', '1', 3, 1, NULL, 'Indonesia', 'Kristen', '2017-05-07'),
-(4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(5, 'Indonesia', 'Gembala Baik', 'Jl. Tanjungpura', '1', 3, 1, NULL, 'Indonesia', 'Kristen', '2017-05-12');
-
 -- --------------------------------------------------------
 
 --
@@ -157,26 +141,39 @@ INSERT INTO `others` (`id`, `WN`, `asal_sekolah`, `alamat_asal_sekolah`, `kelas_
 --
 
 CREATE TABLE `staf` (
-  `id` smallint(4) UNSIGNED NOT NULL,
+  `id` smallint(5) UNSIGNED NOT NULL,
   `name` char(50) NOT NULL,
-  `hire_date` date NOT NULL,
-  `end_contract` date NOT NULL,
-  `place_birth` char(30) NOT NULL,
-  `date_birth` date NOT NULL,
-  `email` char(30) DEFAULT NULL,
-  `phone_number` char(12) DEFAULT NULL,
-  `wa` char(12) DEFAULT NULL,
-  `bbm` char(12) DEFAULT NULL,
-  `status` char(20) NOT NULL
+  `staf_hire_date` date NOT NULL,
+  `staf_end_contract` date NOT NULL,
+  `staf_place_birth` char(50) NOT NULL,
+  `staf_date_birth` date NOT NULL,
+  `staf_status` tinyint(2) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data untuk tabel `staf`
+-- Struktur dari tabel `staf_contact`
 --
 
-INSERT INTO `staf` (`id`, `name`, `hire_date`, `end_contract`, `place_birth`, `date_birth`, `email`, `phone_number`, `wa`, `bbm`, `status`) VALUES
-(3, 'Willy', '2017-08-02', '2017-08-31', 'Singkawang', '1996-10-05', 'willychai05@gmail.com', '08985935425', '08985935425', NULL, 'ICT'),
-(4, 'rina', '2017-08-08', '2017-08-31', 'asdf', '2017-08-24', NULL, NULL, NULL, NULL, 'TU');
+CREATE TABLE `staf_contact` (
+  `id` smallint(5) UNSIGNED NOT NULL,
+  `staf_email` char(50) DEFAULT NULL,
+  `staf_phone_number` char(12) DEFAULT NULL,
+  `staf_bbm` char(10) DEFAULT NULL,
+  `staf_wa` char(12) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `staf_status`
+--
+
+CREATE TABLE `staf_status` (
+  `id` tinyint(2) UNSIGNED NOT NULL,
+  `staf_status` char(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -203,18 +200,12 @@ CREATE TABLE `students` (
 --
 
 CREATE TABLE `users` (
-  `id` smallint(4) UNSIGNED NOT NULL,
+  `id` smallint(5) UNSIGNED NOT NULL,
   `user` char(30) NOT NULL,
-  `pass` char(100) NOT NULL
+  `pass` char(100) NOT NULL,
+  `staf_status` tinyint(2) UNSIGNED NOT NULL,
+  `staf_id` smallint(5) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `users`
---
-
-INSERT INTO `users` (`id`, `user`, `pass`) VALUES
-(3, 'willychai05@gmail.com', '23f3094a2cd4633873918960bef54ab6cd7f3340'),
-(4, 'rina', '70e21878d268fa8f82817f9278f8bae0fb108950');
 
 --
 -- Indexes for dumped tables
@@ -260,6 +251,19 @@ ALTER TABLE `others`
 -- Indexes for table `staf`
 --
 ALTER TABLE `staf`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `staf_status` (`staf_status`);
+
+--
+-- Indexes for table `staf_contact`
+--
+ALTER TABLE `staf_contact`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `staf_status`
+--
+ALTER TABLE `staf_status`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -273,7 +277,9 @@ ALTER TABLE `students`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `staf_status` (`staf_status`),
+  ADD KEY `staf_id` (`staf_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -288,22 +294,32 @@ ALTER TABLE `class`
 -- AUTO_INCREMENT for table `generation`
 --
 ALTER TABLE `generation`
-  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `others`
 --
 ALTER TABLE `others`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `staf`
 --
 ALTER TABLE `staf`
-  MODIFY `id` smallint(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `staf_status`
+--
+ALTER TABLE `staf_status`
+  MODIFY `id` tinyint(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
@@ -333,6 +349,18 @@ ALTER TABLE `others`
   ADD CONSTRAINT `others_ibfk_1` FOREIGN KEY (`id`) REFERENCES `students` (`id`);
 
 --
+-- Ketidakleluasaan untuk tabel `staf`
+--
+ALTER TABLE `staf`
+  ADD CONSTRAINT `staf_ibfk_1` FOREIGN KEY (`staf_status`) REFERENCES `staf_status` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `staf_contact`
+--
+ALTER TABLE `staf_contact`
+  ADD CONSTRAINT `staf_contact_ibfk_1` FOREIGN KEY (`id`) REFERENCES `staf` (`id`);
+
+--
 -- Ketidakleluasaan untuk tabel `students`
 --
 ALTER TABLE `students`
@@ -342,7 +370,8 @@ ALTER TABLE `students`
 -- Ketidakleluasaan untuk tabel `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id`) REFERENCES `staf` (`id`);
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`staf_status`) REFERENCES `staf_status` (`id`),
+  ADD CONSTRAINT `users_ibfk_2` FOREIGN KEY (`staf_id`) REFERENCES `staf` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
