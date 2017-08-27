@@ -130,6 +130,7 @@
             <td>Religion</td>
             <td>:</td>
             <td><select id="religion">
+              <option value="" selected>none</option>
               <option value="Islam">Islam</option>
               <option value="Kristen">Kristen</option>
               <option value="Katolik">Katolik</option>
@@ -214,6 +215,7 @@
             <td>Religion</td>
             <td>:</td>
             <td><select id="dadReligion">
+              <option value="" selected>none</option>
               <option value="Islam">Islam</option>
               <option value="Kristen">Kristen</option>
               <option value="Katolik">Katolik</option>
@@ -293,6 +295,7 @@
             <td>Religion</td>
             <td>:</td>
             <td><select id="momReligion">
+              <option value="" selected>none</option>
               <option value="Islam">Islam</option>
               <option value="Kristen">Kristen</option>
               <option value="Katolik">Katolik</option>
@@ -372,6 +375,7 @@
             <td>Religion</td>
             <td>:</td>
             <td><select id="guardReligion">
+              <option value="" selected>none</option>
               <option value="Islam">Islam</option>
               <option value="Kristen">Kristen</option>
               <option value="Katolik">Katolik</option>

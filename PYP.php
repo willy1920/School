@@ -12,7 +12,7 @@
 
       <ul class="leftMenu-ul" id="leftMenu">
         <li class="leftMenu-li" id="leftMenu0" ><?php echo $_SESSION['user']; ?></li>
-        <li class="leftMenu-li" id="leftMenu1" >Kelola Wali Kelas</li>
+        <li class="leftMenu-li" id="leftMenu1" onclick="dashboardKelolaWaliKelas()">Kelola Wali Kelas</li>
       </ul>
     </menu>
 
