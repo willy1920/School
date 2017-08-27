@@ -160,7 +160,7 @@
                   <td></td>
                   <td class="td">b. Pada tanggal</td>
                   <td>:</td>
-                  <td class="isi"><?php echo $row['tanggal_diterima']; ?></td>
+                  <td class="isi"><?php echo date("d F Y", strtotime($row['tanggal_diterima'])); ?></td>
                 </tr>
                 <tr>
                   <td>10.</td>
