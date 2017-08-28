@@ -24,7 +24,6 @@
 
     function dashboardBiodata(){
       $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->name);
-      setlocale(LC_TIME, 'id_ID.UTF8');
       $query = $mysqli->query("SELECT * FROM generation");
       $num = $query->num_rows;
       if($num > 0){

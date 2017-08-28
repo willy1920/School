@@ -132,11 +132,11 @@
             <td><select id="religion">
               <option value="" selected>none</option>
               <option value="Islam">Islam</option>
-              <option value="Kristen">Kristen Protestan</option>
+              <option value="Kristen Protestan">Kristen Protestan</option>
               <option value="Katolik">Katolik</option>
-              <option value="Budha">Buddha</option>
+              <option value="Buddha">Buddha</option>
               <option value="Hindu">Hindu</option>
-              <option value="Kong Hu Chu">Kong Hu Cu</option>
+              <option value="Kong Hu Cu">Kong Hu Cu</option>
             </select></td>
           </tr>
           <tr>
@@ -217,11 +217,11 @@
             <td><select id="dadReligion">
               <option value="" selected>none</option>
               <option value="Islam">Islam</option>
-              <option value="Kristen">Kristen Protestan</option>
+              <option value="Kristen Protestan">Kristen Protestan</option>
               <option value="Katolik">Katolik</option>
-              <option value="Budha">Buddha</option>
+              <option value="Buddha">Buddha</option>
               <option value="Hindu">Hindu</option>
-              <option value="Kong Hu Chu">Kong Hu Cu</option>
+              <option value="Kong Hu Cu">Kong Hu Cu</option>
             </select></td>
           </tr>
         </table>
@@ -297,11 +297,11 @@
             <td><select id="momReligion">
               <option value="" selected>none</option>
               <option value="Islam">Islam</option>
-              <option value="Kristen">Kristen Protestan</option>
+              <option value="Kristen Protestan">Kristen Protestan</option>
               <option value="Katolik">Katolik</option>
-              <option value="Budha">Buddha</option>
+              <option value="Buddha">Buddha</option>
               <option value="Hindu">Hindu</option>
-              <option value="Kong Hu Chu">Kong Hu Cu</option>
+              <option value="Kong Hu Cu">Kong Hu Cu</option>
             </select></td>
           </tr>
         </table>
@@ -377,11 +377,11 @@
             <td><select id="guardReligion">
               <option value="" selected>none</option>
               <option value="Islam">Islam</option>
-              <option value="Kristen">Kristen Protestan</option>
+              <option value="Kristen Protestan">Kristen Protestan</option>
               <option value="Katolik">Katolik</option>
-              <option value="Budha">Buddha</option>
+              <option value="Buddha">Buddha</option>
               <option value="Hindu">Hindu</option>
-              <option value="Kong Hu Chu">Kong Hu Cu</option>
+              <option value="Kong Hu Cu">Kong Hu Cu</option>
             </select></td>
           </tr>
           <tr>
