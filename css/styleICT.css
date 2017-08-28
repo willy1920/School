@@ -65,7 +65,7 @@ html, body{width: 100%; height: 100%; box-sizing: border-box; z-index: 0; paddin
 .print .leftPrint header{
   text-align: center;
   font-size: 140;
-  margin-bottom: 15px;
+  margin: 0 0 15px -63px;
 }
 .print .leftPrint ol{margin: 0; padding: 0;text-align: justify; font-size: 12}
 .print h1{
