@@ -3,8 +3,28 @@
 
   class ICT extends Database{
 
+    function DateToIndo($date) {
+      $BulanIndo = array("Januari", "Februari", "Maret", "April",
+      "Mei", "Juni", "Juli", "Agustus", "September", "Oktober",
+      "November", "Desember");
+
+      // memisahkan format tahun menggunakan substring
+      $tahun = substr($date, 0, 4);
+
+      // memisahkan format bulan menggunakan substring
+      $bulan = substr($date, 5, 2);
+
+      // memisahkan format tanggal menggunakan substring
+      $tgl = substr($date, 8, 2);
+
+      $result = $tgl . " " . $BulanIndo[(int)$bulan-1] . " ". $tahun;
+
+      return($result);
+    }
+
     function dashboardBiodata(){
       $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->name);
+      setlocale(LC_TIME, 'id_ID.UTF8');
       $query = $mysqli->query("SELECT * FROM generation");
       $num = $query->num_rows;
       if($num > 0){
@@ -77,13 +97,13 @@
             <section class="leftPrint">
               <header>PETUNJUK PENGGUNAAN</header>
               <ol>
-                <li>Laporan Hasil Belajar ini dipergunakan selama siswa mengikuti pelajaran di Sekolah Dasar Tunas Bangsa</li>
+                <li>Laporan Hasil Belajar ini dipergunakan selama siswa mengikuti pelajaran di Sekolah Dasar Tunas Bangsa.</li>
                 <li>Apabila siswa pindah sekolah, maka Laporan Hasil Belajar Siswa ini dibawa oleh siswa yang bersangkutan untuk dipergunakan
-                di sekolah baru dengan meninggalkan arsip atau copy di sekolah lama</li>
+                di sekolah baru dengan meninggalkan arsip atau copy di sekolah lama.</li>
                 <li>Apabila Laporan Hasil Belajar Siswa yang bersangkutan hilang, dapat diganti dengan Laporan Penilaian Hasil Belajar Siswa
-                Pengganti yang nilai-nilainya diambil dari Buku Induk Sekolah Asal Siswa dan disahkan oleh Kepala Sekolah Asal</li>
-                <li>Laporan Penilaian Hasil Belajar Siswa ini harus dilengkapi dengan pas foto dengan ukuran (3 cm x 4 cm) dan pengisiannya
-                dilakukan oleh Guru Kelas</li>
+                Pengganti yang nilai-nilainya diambil dari Buku Induk Sekolah Asal Siswa dan disahkan oleh Kepala Sekolah Asal.</li>
+                <li>Laporan Penilaian Hasil Belajar Siswa ini harus dilengkapi dengan pas foto dengan ukuran 3 cm x 4 cm dan pengisiannya
+                dilakukan oleh Guru Kelas.</li>
               </ol>
             </section>
 
@@ -112,7 +132,7 @@
                   <td>4.</td>
                   <td class="td">Tempat dan tgl lahir</td>
                   <td>:</td>
-                  <td class="isi"><?php echo $row['place_birth'].", ".date("d F Y", strtotime($row['date_birth'])); ?></td>
+                  <td class="isi"><?php echo $row['place_birth'].", ".$this->DateToIndo(date("Y-m-d", strtotime($row['date_birth']))); ?></td>
                 </tr>
                 <tr>
                   <td>5.</td>
@@ -160,7 +180,7 @@
                   <td></td>
                   <td class="td">b. Pada tanggal</td>
                   <td>:</td>
-                  <td class="isi"><?php echo date("d F Y", strtotime($row['tanggal_diterima'])); ?></td>
+                  <td class="isi"><?php echo $this->DateToIndo(date("Y-m-d", strtotime($row['tanggal_diterima']))); ?></td>
                 </tr>
                 <tr>
                   <td>10.</td>
@@ -257,7 +277,7 @@
               <section class="footer">
                 <div class="footerPhoto"></div>
                 <div class="footerTTD">
-                  Sungai Raya, 1 Juli 2016 <br>
+                  Sungai Raya, <?php echo $this->DateToIndo(date("Y-m-d", strtotime($row['tanggal_diterima']))); ?> <br>
                   Kepala Sekolah <br><br><br><br><br>
                   Agustin Madjid, S.Pd.
                 </div>
