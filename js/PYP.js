@@ -11,7 +11,9 @@ function dashboardKelolaWaliKelas(){
   var ajaxRequest = ajax(ajaxRequest);
   ajaxRequest.onreadystatechange = function(){
     if(ajaxRequest.status == 200 && ajaxRequest.readyState == 4){
-      var respon = ajaxRequest.responseText;
+      var respon = ajaxRequest.responseText;  
+      var display = document.getElementById('respon');
+      display.innerHTML = respon;
     }
   }
   ajaxRequest.open("POST", "config/PYPDashboardKelolaWaliKelas.php", true);
