@@ -79,6 +79,51 @@
         echo '{"code":"0"}';
       }
     }
+
+    function dashboardKelolaStaf(){
+      $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->name);
+      $sql = "SELECT id, name FROM staf WHERE staf_status = ''";
+      $query = $mysqli->query($sql);
+      if($query->num_rows > 0){
+        ?>
+          <select id="staf">
+            <?php
+              while ($row = $query->fetch_assoc()) {
+                echo "<option value='".$row['id']."'>".$row['name']."</option>";
+              }
+            ?>
+          </select>
+        <?php
+      }
+      else{
+        ?>
+          <select id="staf">
+            <option value="">none</option>
+          </select>
+        <?php
+      }
+
+      $sql = "SELECT * FROM staf_status WHERE staf_status <> 'root'";
+      $query = $mysqli->query($sql);
+      if($query->num_rows > 0){
+        ?>
+          <select id="staf_status">
+            <?php
+              while ($row = $query->fetch_assoc()) {
+                echo "<option value='".$row['id']."'>".$row['staf_status']."</option>";
+              }
+            ?>
+          </select>
+        <?php
+      }
+      else {
+        ?>
+          <select id="staf_status">
+            <option value="">none</option>
+          </select>
+        <?php
+      }
+    }
   }
 
 ?>
