@@ -68,3 +68,26 @@ function dashboardKelolaStaf(){
   ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   ajaxRequest.send();
 }
+
+function updateStafStatus(){
+  var id = document.getElementById("staf").value;
+  var status = document.getElementById("staf_status").value;
+
+  var ajaxRequest = ajax(ajaxRequest);
+  ajaxRequest.onreadystatechange = function(){
+    if (ajaxRequest.status == 200 && ajaxRequest.readyState == 4) {
+      var respon = ajaxRequest.responseText;
+      var json = JSON.parse(respon);
+      if(json.code == 1){
+        alert("Success");
+      } else{
+        alert("Error");
+        console.log(respon);
+      }
+    }
+  }
+  var input = "id=" + id + "&status=" + status;
+  ajaxRequest.open("POST", "config/PYPSubmitStafStatus.php", true);
+  ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  ajaxRequest.send(input);
+}

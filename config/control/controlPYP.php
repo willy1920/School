@@ -82,11 +82,11 @@
 
     function dashboardKelolaStaf(){
       $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->name);
-      $sql = "SELECT id, name FROM staf WHERE staf_status = ''";
+      $sql = "SELECT id, name FROM staf WHERE staf_status is null";
       $query = $mysqli->query($sql);
       if($query->num_rows > 0){
         ?>
-          <select id="staf">
+          Select staf : <select id="staf">
             <?php
               while ($row = $query->fetch_assoc()) {
                 echo "<option value='".$row['id']."'>".$row['name']."</option>";
@@ -97,7 +97,7 @@
       }
       else{
         ?>
-          <select id="staf">
+          Select staf : <select id="staf">
             <option value="">none</option>
           </select>
         <?php
@@ -107,7 +107,8 @@
       $query = $mysqli->query($sql);
       if($query->num_rows > 0){
         ?>
-          <select id="staf_status">
+          <br>
+          Select job : <select id="staf_status">
             <?php
               while ($row = $query->fetch_assoc()) {
                 echo "<option value='".$row['id']."'>".$row['staf_status']."</option>";
@@ -118,10 +119,31 @@
       }
       else {
         ?>
-          <select id="staf_status">
+          <br>
+          Select job : <select id="staf_status">
             <option value="">none</option>
           </select>
+          <br>
         <?php
+      }
+      ?>
+        <br><button onclick="updateStafStatus()">Submit</button>
+      <?php
+    }
+
+    function submitStafStatus($id, $status){
+      $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->name);
+      $sql = "UPDATE staf SET staf_status=? WHERE id=?";
+      $stmt = $mysqli->prepare($sql);
+      if($stmt){
+        $stmt->bind_param("si", $status, $id);
+        if($stmt->execute()){
+          echo '{"code":"1"}';
+        } else{
+          echo '{"code":"0"}';
+        }
+      } else {
+        echo '{"code":"0"}';
       }
     }
   }
