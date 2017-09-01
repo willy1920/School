@@ -344,6 +344,51 @@
       }
     }
 
+    function dashboardKelolaUser($page, $limit){
+      $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->name);
+      $sql = "SELECT user FROM users";
+      $query = $mysqli->query($sql);
+      $banyak = $query->num_rows;
+      $start = $page * $limit;
+      $page = $banyak / $limit;
+      ?>
+        <h1>Users</h1>
+        <button onclick="createNewUser()">New user</button>
+        <button>Delete</button>
+      <?php
+      $sql = "SELECT users.user, staf.name
+              FROM users
+              INNER JOIN staf
+              ON users.staf_id = staf.id
+              limit $start, $limit";
+      $query = $mysqli->query($sql);
+      if($query->num_rows > 0){
+        ?>
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Username</th>
+            </tr>
+        <?php
+        while ($row = $query->fetch_assoc()) {
+          ?>
+            <tr>
+              <td><?php echo $row['name']; ?></td>
+              <td><?php echo $row['user']; ?></td>
+            </tr>
+          <?php
+        }
+
+        ?>
+          </table>
+        <?php
+        $k = 1;
+        for ($i=0; $i <= $page; $i++) {
+          echo "<button onclick='dashboardKelolaUser(".$i.", 10)'>".$k."</button>";
+          $k++;
+        }
+      }
+    }
   }
 
 ?>

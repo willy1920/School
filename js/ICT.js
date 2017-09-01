@@ -111,3 +111,23 @@ function submitBiodata(){
   ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   ajaxRequest.send(input);
 }
+
+function dashboardKelolaUser(start, limit){
+  var ajaxRequest = ajax(ajaxRequest);
+  ajaxRequest.onreadystatechange = function(){
+    if (ajaxRequest.status == 200 && ajaxRequest.readyState == 4) {
+      var respon = ajaxRequest.responseText;
+      var display = document.getElementById("respon");
+      display.innerHTML = respon;
+    }
+  }
+  var input = "page=" + start + "&limit=" + limit;
+  ajaxRequest.open("POST", "config/ICTdashboardKelolaUser.php", true);
+  ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  ajaxRequest.send(input);
+}
+
+
+function createNewUser(){
+  
+}

@@ -7,31 +7,30 @@
       $user = strtolower($user);
       $pass = sha1($pass);
       $stmt = $mysqli->prepare(
-        "SELECT users.id, users.user, users.pass, staf_status.staf_status
+        "SELECT users.user, users.pass, staf_status.staf_status
         FROM users
+        INNER JOIN staf
+        ON users.staf_id = staf.id
         INNER JOIN staf_status
-        ON users.staf_status = staf_status.id
+        ON staf.staf_status = staf_status.id
         WHERE users.user=? and users.pass=?");
 
       if($stmt){
         $stmt->bind_param("ss", $user, $pass);
         $stmt->execute();
-        $stmt->bind_result($id, $user, $pass, $staf);
+        $stmt->bind_result($user, $pass, $staf);
         $stmt->fetch();
         //echo "lol";
-        if(isset($id)){
+        if(isset($user)){
           echo '{"execute":"1",
-            "id":"'.$id.'",
             "user":"'.$user.'",
             "pass":"'.$pass.'",
             "staf":"'.$staf.'"}';
           session_start();
           $_SESSION['user'] = $user;
-          $_SESSION['id'] = $id;
           $_SESSION['staf'] = $staf;
         } else{
           echo '{"execute":"0",
-            "id":"'.$id.'",
             "user":"'.$user.'",
             "pass":"'.$pass.'",
             "staf":"'.$staf.'"}';
