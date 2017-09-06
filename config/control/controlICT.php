@@ -353,7 +353,7 @@
       $page = $banyak / $limit;
       ?>
         <h1>Users</h1>
-        <button onclick="createNewUser()">New user</button>
+        <button onclick="dashboardCreateNewUser()">New user</button>
         <button>Delete</button>
       <?php
       $sql = "SELECT users.user, staf.name

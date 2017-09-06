@@ -127,7 +127,16 @@ function dashboardKelolaUser(start, limit){
   ajaxRequest.send(input);
 }
 
-
-function createNewUser(){
-  
+function dashboardCreateNewUser(){
+  var ajaxRequest = ajax(ajaxRequest);
+  ajaxRequest.onreadystatechange = function(){
+    if (ajaxRequest.status == 200 && ajaxRequest.readyState == 4) {
+      var respon = ajaxRequest.responseText;
+      var display = document.getElementById("respon");
+      display.innerHTML = respon;
+    }
+  }
+  ajaxRequest.open("POST", "config/ICTdashboardCreateNewUser.php", true);
+  ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  ajaxRequest.send();
 }
