@@ -122,6 +122,14 @@
             <td><input type="number" id="ke" placeholder="1"></td>
           </tr>
           <tr>
+            <td>Status dalam keluarga</td>
+            <td>:</td>
+            <td><select id="status">
+              <option value="Anak Kandung">Anak Kandung</option>
+              <option value="Anak Angkat">Anak Angkat</option>
+            </select></td>
+          </tr>
+          <tr>
             <td>Language</td>
             <td>:</td>
             <td><input type="text" id="language" placeholder="Indonesia"></td>

@@ -57,7 +57,7 @@
       }
     }
 
-    function inputOther($id, $nationality, $name, $address, $grade, $saudara, $ke, $language, $religion, $date){
+    function inputOther($id, $nationality, $name, $address, $grade, $saudara, $ke, $language, $religion, $date, $status){
       $mysqli = mysqli_connect($this->host, $this->user, $this->pass, $this->name);
       $stmt = $mysqli->prepare("UPDATE others
         SET WN=?,

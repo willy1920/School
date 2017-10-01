@@ -11,6 +11,7 @@
   $language = htmlspecialchars($_POST['language']);
   $religion = htmlspecialchars($_POST['religion']);
   $accepted = htmlspecialchars($_POST['accepted']);
+  $status = htmlspecialchars($_POST['status']);
 
   $nationality = ucwords($nationality);
   $language = ucwords($language);
@@ -19,5 +20,5 @@
   $religion = ucwords($religion);
 
   $input = new TU;
-  $input->inputOther($id, $nationality, $name, $address, $firstGrade, $saudara, $ke, $language, $religion, $accepted);
+  $input->inputOther($id, $nationality, $name, $address, $firstGrade, $saudara, $ke, $language, $religion, $accepted, $status);
 ?>

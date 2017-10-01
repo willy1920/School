@@ -42,6 +42,7 @@ function input() {
     ajaxRequest.onreadystatechange = function(){
       if(ajaxRequest.readyState == 4 && ajaxRequest.status == 200){
         var respon = ajaxRequest.responseText;
+        console.log(respon);
         var json = JSON.parse(respon);
         for(var i = 0; i < json.length; i++){
           var option = document.createElement('option');
@@ -59,6 +60,7 @@ function input() {
     ajaxRequestt.onreadystatechange = function(){
       if(ajaxRequestt.readyState == 4 && ajaxRequestt.status == 200){
         var respon = ajaxRequestt.responseText;
+        console.log(respon);
         var json = JSON.parse(respon);
         var optionGeneration = document.getElementById('inputGeneration');
         for(var j = 0; j < json.length; j++){
@@ -120,6 +122,7 @@ function otherSubmit(){
   var language = document.getElementById("language").value;
   var religion = document.getElementById("religion").value;
   var accepted = document.getElementById("acceptedDate").value;
+  var status = document.getElementById('status').value;
 
   var ajaxRequest = ajax(ajaxRequest);
   ajaxRequest.onreadystatechange = function(){
@@ -147,7 +150,8 @@ function otherSubmit(){
   + "&ke=" + ke
   + "&language=" + language
   + "&religion=" + religion
-  + "&accepted=" + accepted;
+  + "&accepted=" + accepted
+  + "&status=" + status;
   ajaxRequest.open("POST", "config/TUInputOther.php", true);
   ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   ajaxRequest.send(input);
